@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroBot - Reacción del LED</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .reaction-container {
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #16a34a;
+        }
+
+        .led {
+            width: 160px;
+            height: 160px;
+            margin: 35px auto;
+            border-radius: 50%;
+            background: #334155;
+            border: 8px solid #64748b;
+            box-shadow: inset 0 0 25px #0f172a;
+        }
+
+        .led.on {
+            background: #22c55e;
+            box-shadow: 0 0 45px #22c55e;
+        }
+
+        .reaction-button {
+            width: 220px;
+            height: 70px;
+            border: none;
+            border-radius: 15px;
+            background: #16a34a;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .reaction-button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .message {
+            min-height: 35px;
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #64748b;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">⚡ ElectroBot</div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="minijuegos.html">Minijuegos</a>
+    </nav>
+</header>
+
+<main class="reaction-container">
+    <h1>⏱️ Reacción del LED</h1>
+
+    <p>
+        Espera a que el LED se encienda y presiona el botón lo más rápido posible.
+    </p>
+
+    <div id="led" class="led"></div>
+
+    <button id="reactionButton" class="reaction-button">
+        Iniciar
+    </button>
+
+    <p id="message" class="message"></p>
+
+    <button class="button" onclick="location.reload()">
+        Reiniciar
+    </button>
+</main>
+
+<script>
+    const led = document.getElementById("led");
+    const button = document.getElementById("reactionButton");
+    const message = document.getElementById("message");
+
+    let startTime = 0;
+    let timeout;
+
+    button.addEventListener("click", () => {
+        if (button.textContent === "Iniciar") {
+            button.textContent = "Espera...";
+            button.disabled = true;
+            message.textContent = "Prepárate...";
+
+            const randomTime = Math.floor(Math.random() * 4000) + 2000;
+
+            timeout = setTimeout(() => {
+                led.classList.add("on");
+                button.disabled = false;
+                button.textContent = "¡PRESIONA!";
+                startTime = Date.now();
+                message.textContent = "💡 ¡El LED está encendido!";
+            }, randomTime);
+        } else {
+            const reactionTime = Date.now() - startTime;
+
+            led.classList.remove("on");
+            button.textContent = "Iniciar";
+
+            message.textContent =
+                `⚡ Tu tiempo de reacción fue de ${reactionTime} milisegundos.`;
+
+            message.style.color = "#15803d";
+        }
+    });
+</script>
+
+</body>
+</html>

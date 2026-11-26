@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ElectroBot - Minijuegos</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .minigames-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .minigames-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .minigames-header h1 {
+            color: #16a34a;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .minigames-header p {
+            color: #64748b;
+            font-size: 17px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .game-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+            transition: 0.25s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+            border-color: #22c55e;
+        }
+
+        .game-icon {
+            font-size: 52px;
+            margin-bottom: 15px;
+        }
+
+        .game-card h2 {
+            margin-bottom: 10px;
+            color: #166534;
+            font-size: 22px;
+        }
+
+        .game-card p {
+            color: #64748b;
+            min-height: 60px;
+            line-height: 1.5;
+        }
+
+        .play-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: #16a34a;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .play-button:hover {
+            background: #15803d;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: #cbd5e1;
+            color: #475569;
+            font-weight: bold;
+        }
+
+        .game-badge {
+            display: inline-block;
+            margin-bottom: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .minigames-container {
+                padding: 15px;
+            }
+
+            .minigames-header h1 {
+                font-size: 28px;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            ⚡ ElectroBot
+        </div>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="componentes.html">Componentes</a>
+            <a href="guia.html">Guía</a>
+            <a href="calculadoras.html">Calculadoras</a>
+            <a href="minijuegos.html">Minijuegos</a>
+        </nav>
+    </header>
+
+    <main class="minigames-container">
+
+        <section class="minigames-header">
+            <h1>🎮 Minijuegos de Electrónica</h1>
+            <p>
+                Aprende electrónica mientras juegas, resuelves desafíos y armas circuitos.
+            </p>
+        </section>
+
+        <section class="games-grid">
+
+    <!-- Minijuego 1 -->
+    <article class="game-card">
+        <div class="game-icon">🌀</div>
+        <span class="game-badge">Disponible</span>
+
+        <h2>Laberinto Eléctrico</h2>
+
+        <p>
+            Lleva la energía desde la batería hasta el LED evitando las paredes.
+        </p>
+
+        <a href="laberinto.html" class="play-button">
+            🎮 Jugar
+        </a>
+    </article>
+
+    <!-- Minijuego 2 -->
+    <article class="game-card">
+        <div class="game-icon">🧠</div>
+        <span class="game-badge">Disponible</span>
+
+        <h2>Memoria Electrónica</h2>
+
+        <p>
+            Observa una secuencia de luces y repítela correctamente.
+        </p>
+
+        <a href="memoria.html" class="play-button">
+            🎮 Jugar
+        </a>
+    </article>
+
+
+    <!-- Minijuego 3 -->
+    <article class="game-card">
+        <div class="game-icon">🎨</div>
+        <span class="game-badge">Disponible</span>
+
+        <h2>Código de Colores</h2>
+
+        <p>
+            Observa las bandas de una resistencia y adivina su valor.
+        </p>
+
+        <a href="codigo-colores.html" class="play-button">
+            🎮 Jugar
+        </a>
+    </article>
+
+
+    <!-- Minijuego 4 -->
+    <article class="game-card">
+        <div class="game-icon">⚠️</div>
+        <span class="game-badge">Disponible</span>
+
+        <h2>Detecta el Error</h2>
+
+        <p>
+            Encuentra el componente que está conectado incorrectamente.
+        </p>
+
+        <a href="detecta-error.html" class="play-button">
+            🎮 Jugar
+        </a>
+    </article>
+
+
+    <!-- Minijuego 5 -->
+    <article class="game-card">
+        <div class="game-icon">⚡</div>
+        <span class="game-badge">Disponible</span>
+
+        <h2>Atrapa Electrones</h2>
+
+        <p>
+            Mueve el electrón azul y recoge todas las cargas amarillas.
+        </p>
+
+        <a href="atrapa-electrones.html" class="play-button">
+            🎮 Jugar
+        </a>
+    </article>
+
+
+    <!-- Minijuego 6 -->
+    <article class="game-card">
+        <div class="game-icon">⏱️</div>
+        <span class="game-badge">Disponible</span>
+
+        <h2>Reacción del LED</h2>
+
+        <p>
+            Presiona el botón rápidamente cuando el LED se encienda.
+        </p>
+
+        <a href="reaccion-led.html" class="play-button">
+            🎮 Jugar
+        </a>
+    </article>
+
+
+    <!-- Minijuego 7 -->
+    <article class="game-card">
+        <div class="game-icon">🔢</div>
+        <span class="game-badge">Disponible</span>
+
+        <h2>Ordena el Circuito</h2>
+
+        <p>
+            Organiza los componentes en el orden correcto para formar un circuito.
+        </p>
+
+        <a href="ordena-circuito.html" class="play-button">
+            🎮 Jugar
+        </a>
+    </article>
+
+</section>
+
+    </main>
+
+</body>
+</html>

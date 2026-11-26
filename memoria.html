@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroBot - Arma el Circuito</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .game-container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #16a34a;
+        }
+
+        .instruction {
+            color: #64748b;
+        }
+
+        .circuit-board {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            padding: 25px;
+            background: #e2e8f0;
+            border-radius: 15px;
+        }
+
+        .slot {
+            width: 130px;
+            min-height: 90px;
+            border: 3px dashed #94a3b8;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8fafc;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .slot.correct {
+            border-color: #16a34a;
+            background: #dcfce7;
+        }
+
+        .slot.wrong {
+            border-color: #dc2626;
+            background: #fee2e2;
+        }
+
+        .arrow {
+            font-size: 25px;
+            color: #16a34a;
+        }
+
+        .components {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .component {
+            padding: 15px 20px;
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            cursor: grab;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,.08);
+        }
+
+        .component:hover {
+            border-color: #22c55e;
+            transform: translateY(-3px);
+        }
+
+        .message {
+            min-height: 30px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #16a34a;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #15803d;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">⚡ ElectroBot</div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="minijuegos.html">Minijuegos</a>
+    </nav>
+</header>
+
+<main class="game-container">
+    <h1>🧩 Arma el Circuito</h1>
+
+    <p class="instruction">
+        Arrastra los componentes a los espacios en el orden correcto.
+    </p>
+
+    <section class="circuit-board">
+        <div class="slot" data-answer="Batería">Batería</div>
+        <div class="arrow">→</div>
+
+        <div class="slot" data-answer="Interruptor">Espacio vacío</div>
+        <div class="arrow">→</div>
+
+        <div class="slot" data-answer="Resistencia">Espacio vacío</div>
+        <div class="arrow">→</div>
+
+        <div class="slot" data-answer="LED">Espacio vacío</div>
+    </section>
+
+    <h2>Componentes disponibles</h2>
+
+    <section class="components">
+        <div class="component" draggable="true" data-name="LED">💡 LED</div>
+        <div class="component" draggable="true" data-name="Resistencia">〰️ Resistencia</div>
+        <div class="component" draggable="true" data-name="Interruptor">🔘 Interruptor</div>
+        <div class="component" draggable="true" data-name="Batería">🔋 Batería</div>
+    </section>
+
+    <p id="message" class="message"></p>
+
+    <button class="button" onclick="restartGame()">
+        Reiniciar
+    </button>
+</main>
+
+<script>
+    const components = document.querySelectorAll(".component");
+    const slots = document.querySelectorAll(".slot");
+    const message = document.getElementById("message");
+
+    let draggedComponent = null;
+
+    components.forEach(component => {
+        component.addEventListener("dragstart", () => {
+            draggedComponent = component;
+        });
+    });
+
+    slots.forEach(slot => {
+        slot.addEventListener("dragover", event => {
+            event.preventDefault();
+        });
+
+        slot.addEventListener("drop", () => {
+            if (!draggedComponent) return;
+
+            const selectedName = draggedComponent.dataset.name;
+            const correctName = slot.dataset.answer;
+
+            if (selectedName === correctName) {
+                slot.textContent = "✅ " + selectedName;
+                slot.classList.add("correct");
+                slot.classList.remove("wrong");
+                draggedComponent.style.display = "none";
+
+                message.textContent = "¡Correcto! Componente colocado.";
+                message.style.color = "#15803d";
+
+                checkComplete();
+            } else {
+                slot.classList.add("wrong");
+
+                message.textContent =
+                    "❌ Ese componente no corresponde a este espacio.";
+                message.style.color = "#dc2626";
+
+                setTimeout(() => {
+                    slot.classList.remove("wrong");
+                }, 800);
+            }
+        });
+    });
+
+    function checkComplete() {
+        const completed = [...slots].every(slot =>
+            slot.classList.contains("correct")
+        );
+
+        if (completed) {
+            message.textContent =
+                "🎉 ¡Excelente! Has armado correctamente el circuito.";
+            message.style.color = "#15803d";
+        }
+    }
+
+    function restartGame() {
+        location.reload();
+    }
+</script>
+
+</body>
+</html>

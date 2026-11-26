@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroBot - Ordena el Circuito</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .order-container {
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #16a34a;
+        }
+
+        .instruction {
+            color: #64748b;
+        }
+
+        .circuit-list {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            min-height: 90px;
+            padding: 20px;
+            background: #e2e8f0;
+            border-radius: 15px;
+        }
+
+        .circuit-item {
+            padding: 18px;
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            cursor: grab;
+            font-weight: bold;
+        }
+
+        .circuit-item:hover {
+            border-color: #22c55e;
+        }
+
+        .button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #16a34a;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .message {
+            min-height: 30px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">⚡ ElectroBot</div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="minijuegos.html">Minijuegos</a>
+    </nav>
+</header>
+
+<main class="order-container">
+    <h1>🔢 Ordena el Circuito</h1>
+
+    <p class="instruction">
+        Ordena los componentes para formar un circuito básico.
+    </p>
+
+    <div id="circuitList" class="circuit-list">
+        <div class="circuit-item" draggable="true" data-order="3">
+            💡 LED
+        </div>
+
+        <div class="circuit-item" draggable="true" data-order="1">
+            🔋 Batería
+        </div>
+
+        <div class="circuit-item" draggable="true" data-order="4">
+            🔁 Cable de regreso
+        </div>
+
+        <div class="circuit-item" draggable="true" data-order="2">
+            〰️ Resistencia
+        </div>
+    </div>
+
+    <button class="button" onclick="checkOrder()">
+        Comprobar orden
+    </button>
+
+    <button class="button" onclick="location.reload()">
+        Reiniciar
+    </button>
+
+    <p id="message" class="message"></p>
+</main>
+
+<script>
+    const list = document.getElementById("circuitList");
+    const message = document.getElementById("message");
+
+    let draggedItem = null;
+
+    function activateDrag() {
+        const items = document.querySelectorAll(".circuit-item");
+
+        items.forEach(item => {
+            item.addEventListener("dragstart", () => {
+                draggedItem = item;
+            });
+
+            item.addEventListener("dragover", event => {
+                event.preventDefault();
+            });
+
+            item.addEventListener("drop", () => {
+                if (draggedItem === item) return;
+
+                const itemsArray = [...list.children];
+                const draggedIndex = itemsArray.indexOf(draggedItem);
+                const targetIndex = itemsArray.indexOf(item);
+
+                if (draggedIndex < targetIndex) {
+                    list.insertBefore(draggedItem, item.nextSibling);
+                } else {
+                    list.insertBefore(draggedItem, item);
+                }
+            });
+        });
+    }
+
+    function checkOrder() {
+        const items = [...list.children];
+
+        const currentOrder = items.map(item =>
+            Number(item.dataset.order)
+        );
+
+        const correctOrder = [1, 2, 3, 4];
+
+        const isCorrect =
+            JSON.stringify(currentOrder) ===
+            JSON.stringify(correctOrder);
+
+        if (isCorrect) {
+            message.textContent =
+                "🎉 ¡Correcto! El circuito está ordenado correctamente.";
+            message.style.color = "#15803d";
+        } else {
+            message.textContent =
+                "❌ El orden todavía no es correcto.";
+            message.style.color = "#dc2626";
+        }
+    }
+
+    activateDrag();
+</script>
+
+</body>
+</html>

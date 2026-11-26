@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ElectroBot - Laberinto Eléctrico</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .maze-container {
+            max-width: 700px;
+            margin: 35px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .maze-container h1 {
+            color: #16a34a;
+            margin-bottom: 10px;
+        }
+
+        .maze-container p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .maze-info {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .maze-info strong {
+            color: #15803d;
+        }
+
+        .maze {
+            display: grid;
+            grid-template-columns: repeat(10, 35px);
+            grid-template-rows: repeat(10, 35px);
+            justify-content: center;
+            gap: 2px;
+            margin: 20px auto;
+            padding: 10px;
+            background: #334155;
+            border-radius: 12px;
+            width: max-content;
+        }
+
+        .cell {
+            width: 35px;
+            height: 35px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            border-radius: 4px;
+        }
+
+        .wall {
+            background: #1e293b;
+        }
+
+        .player {
+            background: #3b82f6;
+        }
+
+        .goal {
+            background: #22c55e;
+        }
+
+        .battery {
+            background: #facc15;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 55px);
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .control-button {
+            width: 55px;
+            height: 45px;
+            border: none;
+            border-radius: 10px;
+            background: #16a34a;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .control-button:hover {
+            background: #15803d;
+        }
+
+        .empty-control {
+            visibility: hidden;
+        }
+
+        .maze-message {
+            min-height: 30px;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .restart-button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #64748b;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .restart-button:hover {
+            background: #475569;
+        }
+
+        @media (max-width: 500px) {
+            .maze {
+                grid-template-columns: repeat(10, 27px);
+                grid-template-rows: repeat(10, 27px);
+                gap: 1px;
+                padding: 6px;
+            }
+
+            .cell {
+                width: 27px;
+                height: 27px;
+                font-size: 15px;
+            }
+
+            .control-button {
+                width: 48px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            ⚡ ElectroBot
+        </div>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="minijuegos.html">Minijuegos</a>
+        </nav>
+    </header>
+
+    <main class="maze-container">
+
+        <h1>🌀 Laberinto Eléctrico</h1>
+
+        <p>
+            Lleva la energía desde la batería hasta el LED sin tocar las paredes.
+        </p>
+
+        <div class="maze-info">
+            <div>
+                Movimientos:
+                <strong id="moves">0</strong>
+            </div>
+
+            <div>
+                Tiempo:
+                <strong id="time">0</strong> segundos
+            </div>
+        </div>
+
+        <div id="maze" class="maze"></div>
+
+        <div class="controls">
+            <button class="control-button empty-control"></button>
+
+            <button class="control-button" onclick="movePlayer(0, -1)">
+                ▲
+            </button>
+
+            <button class="control-button empty-control"></button>
+
+            <button class="control-button" onclick="movePlayer(-1, 0)">
+                ◀
+            </button>
+
+            <button class="control-button" onclick="movePlayer(0, 1)">
+                ▼
+            </button>
+
+            <button class="control-button" onclick="movePlayer(1, 0)">
+                ▶
+            </button>
+        </div>
+
+        <div id="message" class="maze-message"></div>
+
+        <button class="restart-button" onclick="restartMaze()">
+            Reiniciar laberinto
+        </button>
+
+    </main>
+
+    <script>
+        const mazeLayout = [
+            [0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+            [0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
+            [0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+            [1, 1, 0, 1, 0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+            [0, 1, 1, 1, 0, 1, 0, 1, 0, 0],
+            [0, 0, 0, 1, 0, 0, 0, 1, 1, 0],
+            [1, 1, 0, 1, 1, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+            [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
+        ];
+
+        let player = {
+            x: 0,
+            y: 0
+        };
+
+        const goal = {
+            x: 9,
+            y: 9
+        };
+
+        let moves = 0;
+        let seconds = 0;
+        let timer;
+        let gameFinished = false;
+
+        const mazeElement = document.getElementById("maze");
+        const movesElement = document.getElementById("moves");
+        const timeElement = document.getElementById("time");
+        const messageElement = document.getElementById("message");
+
+        function drawMaze() {
+            mazeElement.innerHTML = "";
+
+            for (let y = 0; y < mazeLayout.length; y++) {
+                for (let x = 0; x < mazeLayout[y].length; x++) {
+                    const cell = document.createElement("div");
+
+                    cell.className = "cell";
+
+                    if (mazeLayout[y][x] === 1) {
+                        cell.classList.add("wall");
+                    }
+
+                    if (x === player.x && y === player.y) {
+                        cell.classList.add("player");
+                        cell.textContent = "⚡";
+                    }
+
+                    if (x === goal.x && y === goal.y) {
+                        cell.classList.add("goal");
+                        cell.textContent = "💡";
+                    }
+
+                    if (x === 0 && y === 0) {
+                        cell.classList.add("battery");
+                        cell.textContent = "🔋";
+                    }
+
+                    mazeElement.appendChild(cell);
+                }
+            }
+        }
+
+        function movePlayer(dx, dy) {
+            if (gameFinished) {
+                return;
+            }
+
+            const newX = player.x + dx;
+            const newY = player.y + dy;
+
+            if (
+                newX < 0 ||
+                newY < 0 ||
+                newY >= mazeLayout.length ||
+                newX >= mazeLayout[0].length
+            ) {
+                return;
+            }
+
+            if (mazeLayout[newY][newX] === 1) {
+                messageElement.textContent = "⚠️ No puedes atravesar una pared.";
+                messageElement.style.color = "#dc2626";
+                return;
+            }
+
+            player.x = newX;
+            player.y = newY;
+
+            moves++;
+            movesElement.textContent = moves;
+
+            messageElement.textContent = "";
+            drawMaze();
+
+            if (player.x === goal.x && player.y === goal.y) {
+                finishGame();
+            }
+        }
+
+        function finishGame() {
+            gameFinished = true;
+
+            clearInterval(timer);
+
+            messageElement.textContent =
+                `🎉 ¡Circuito completado en ${moves} movimientos y ${seconds} segundos!`;
+
+            messageElement.style.color = "#15803d";
+        }
+
+        function restartMaze() {
+            player = {
+                x: 0,
+                y: 0
+            };
+
+            moves = 0;
+            seconds = 0;
+            gameFinished = false;
+
+            movesElement.textContent = moves;
+            timeElement.textContent = seconds;
+
+            messageElement.textContent = "";
+            messageElement.style.color = "";
+
+            clearInterval(timer);
+
+            timer = setInterval(() => {
+                if (!gameFinished) {
+                    seconds++;
+                    timeElement.textContent = seconds;
+                }
+            }, 1000);
+
+            drawMaze();
+        }
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "ArrowUp" || event.key.toLowerCase() === "w") {
+                movePlayer(0, -1);
+            }
+
+            if (event.key === "ArrowDown" || event.key.toLowerCase() === "s") {
+                movePlayer(0, 1);
+            }
+
+            if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
+                movePlayer(-1, 0);
+            }
+
+            if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
+                movePlayer(1, 0);
+            }
+        });
+
+        restartMaze();
+    </script>
+
+</body>
+</html>

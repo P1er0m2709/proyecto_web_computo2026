@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroBot - Detecta el Error</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .error-container {
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #16a34a;
+        }
+
+        .circuit {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 30px;
+            margin: 30px 0;
+            background: #e2e8f0;
+            border-radius: 15px;
+        }
+
+        .part {
+            padding: 20px;
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .part:hover {
+            border-color: #22c55e;
+        }
+
+        .message {
+            min-height: 30px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #16a34a;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">⚡ ElectroBot</div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="minijuegos.html">Minijuegos</a>
+    </nav>
+</header>
+
+<main class="error-container">
+    <h1>⚠️ Detecta el Error</h1>
+
+    <p>
+        Uno de estos componentes está mal conectado. Haz clic sobre él.
+    </p>
+
+    <div class="circuit">
+        <div class="part" onclick="checkPart('battery')">
+            🔋 Batería
+        </div>
+
+        <span>→</span>
+
+        <div class="part" onclick="checkPart('switch')">
+            🔘 Interruptor
+        </div>
+
+        <span>→</span>
+
+        <div class="part" onclick="checkPart('led')">
+            💡 LED
+        </div>
+
+        <span>→</span>
+
+        <div class="part" onclick="checkPart('resistor')">
+            〰️ Resistencia
+        </div>
+    </div>
+
+    <p id="message" class="message"></p>
+
+    <button class="button" onclick="location.reload()">
+        Reiniciar
+    </button>
+</main>
+
+<script>
+    function checkPart(part) {
+        const message = document.getElementById("message");
+
+        if (part === "led") {
+            message.textContent =
+                "✅ ¡Correcto! El LED está conectado al revés.";
+            message.style.color = "#15803d";
+        } else {
+            message.textContent =
+                "❌ Ese componente no tiene el error.";
+            message.style.color = "#dc2626";
+        }
+    }
+</script>
+
+</body>
+</html>

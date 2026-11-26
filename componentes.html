@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroBot | Componentes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <a class="logo" href="index.html">⚡ ElectroBot</a>
+
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="componentes.html" class="active">Componentes</a>
+            <a href="guia.html">Guía</a>
+            <a href="calculadoras.html">Calculadoras</a>
+        </nav>
+
+        <button id="themeButton" class="theme-button" type="button">🌙</button>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <span class="eyebrow">CATÁLOGO EDUCATIVO</span>
+            <h1>Componentes electrónicos</h1>
+            <p>Busca, filtra y conoce los componentes utilizados en electrónica.</p>
+        </section>
+
+        <section class="catalog-controls">
+            <input id="searchInput" type="search" placeholder="Buscar componente...">
+
+            <select id="categoryFilter">
+                <option value="todos">Todas las categorías</option>
+                <option value="pasivos">Componentes pasivos</option>
+                <option value="semiconductores">Semiconductores</option>
+                <option value="integrados">Circuitos integrados</option>
+                <option value="sensores">Sensores</option>
+                <option value="alimentacion">Alimentación</option>
+                <option value="salida">Componentes de salida</option>
+                <option value="herramientas">Herramientas</option>
+            </select>
+        </section>
+
+        <section class="components-grid" id="componentsGrid">
+
+            <article class="component-card" data-category="pasivos" data-name="resistencia resistor">
+                <div class="component-icon">Ω</div>
+                <span class="component-category">Pasivos</span>
+                <h2>Resistencia</h2>
+                <p>Limita el paso de corriente eléctrica.</p>
+                <a href="componentes/resistencia.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="pasivos" data-name="potenciometro">
+                <div class="component-icon">◉</div>
+                <span class="component-category">Pasivos</span>
+                <h2>Potenciómetro</h2>
+                <p>Permite variar manualmente la resistencia.</p>
+                <a href="componentes/potenciometro.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="pasivos" data-name="capacitor condensador">
+                <div class="component-icon">▥</div>
+                <span class="component-category">Pasivos</span>
+                <h2>Capacitor</h2>
+                <p>Almacena energía eléctrica temporalmente.</p>
+                <a href="componentes/capacitor.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="pasivos" data-name="inductor bobina">
+                <div class="component-icon">〰</div>
+                <span class="component-category">Pasivos</span>
+                <h2>Inductor</h2>
+                <p>Almacena energía en un campo magnético.</p>
+                <a href="componentes/inductor.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="pasivos" data-name="transformador">
+                <div class="component-icon">⚡</div>
+                <span class="component-category">Pasivos</span>
+                <h2>Transformador</h2>
+                <p>Cambia los niveles de voltaje en corriente alterna.</p>
+                <a href="componentes/transformador.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="pasivos" data-name="rele">
+                <div class="component-icon">↯</div>
+                <span class="component-category">Pasivos</span>
+                <h2>Relé</h2>
+                <p>Controla una carga usando una señal eléctrica.</p>
+                <a href="componentes/rele.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="semiconductores" data-name="diodo">
+                <div class="component-icon">▶</div>
+                <span class="component-category">Semiconductores</span>
+                <h2>Diodo</h2>
+                <p>Permite el paso de corriente principalmente en una dirección.</p>
+                <a href="componentes/diodo.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="semiconductores" data-name="led">
+                <div class="component-icon">●</div>
+                <span class="component-category">Semiconductores</span>
+                <h2>LED</h2>
+                <p>Emite luz cuando circula corriente eléctrica.</p>
+                <a href="componentes/led.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="semiconductores" data-name="transistor">
+                <div class="component-icon">T</div>
+                <span class="component-category">Semiconductores</span>
+                <h2>Transistor</h2>
+                <p>Funciona como interruptor o amplificador.</p>
+                <a href="componentes/transistor.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="semiconductores" data-name="mosfet">
+                <div class="component-icon">M</div>
+                <span class="component-category">Semiconductores</span>
+                <h2>MOSFET</h2>
+                <p>Controla el paso de corriente mediante voltaje.</p>
+                <a href="componentes/mosfet.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="integrados" data-name="ne555 temporizador">
+                <div class="component-icon">555</div>
+                <span class="component-category">Integrados</span>
+                <h2>NE555</h2>
+                <p>Genera pulsos, temporizadores y señales.</p>
+                <a href="componentes/ne555.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="integrados" data-name="lm358 amplificador operacional">
+                <div class="component-icon">A</div>
+                <span class="component-category">Integrados</span>
+                <h2>LM358</h2>
+                <p>Amplificador operacional para circuitos analógicos.</p>
+                <a href="componentes/lm358.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="integrados" data-name="arduino">
+                <div class="component-icon">▣</div>
+                <span class="component-category">Integrados</span>
+                <h2>Arduino</h2>
+                <p>Plataforma programable para proyectos electrónicos.</p>
+                <a href="componentes/arduino.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="integrados" data-name="esp32">
+                <div class="component-icon">ESP</div>
+                <span class="component-category">Integrados</span>
+                <h2>ESP32</h2>
+                <p>Microcontrolador con Wi-Fi y Bluetooth.</p>
+                <a href="componentes/esp32.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="sensores" data-name="ldr fotoresistencia luz">
+                <div class="component-icon">☀</div>
+                <span class="component-category">Sensores</span>
+                <h2>LDR</h2>
+                <p>Detecta la intensidad de la luz ambiental.</p>
+                <a href="componentes/ldr.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="sensores" data-name="termistor temperatura">
+                <div class="component-icon">♨</div>
+                <span class="component-category">Sensores</span>
+                <h2>Termistor</h2>
+                <p>Cambia su resistencia según la temperatura.</p>
+                <a href="componentes/termistor.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="sensores" data-name="ultrasonico distancia">
+                <div class="component-icon">◌</div>
+                <span class="component-category">Sensores</span>
+                <h2>Sensor ultrasónico</h2>
+                <p>Mide distancias usando ondas ultrasónicas.</p>
+                <a href="componentes/ultrasonico.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="sensores" data-name="pir movimiento">
+                <div class="component-icon">◉</div>
+                <span class="component-category">Sensores</span>
+                <h2>Sensor PIR</h2>
+                <p>Detecta movimiento mediante infrarrojos.</p>
+                <a href="componentes/pir.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="alimentacion" data-name="bateria pila">
+                <div class="component-icon">▮</div>
+                <span class="component-category">Alimentación</span>
+                <h2>Batería</h2>
+                <p>Proporciona energía eléctrica a un circuito.</p>
+                <a href="componentes/bateria.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="alimentacion" data-name="regulador voltaje">
+                <div class="component-icon">V</div>
+                <span class="component-category">Alimentación</span>
+                <h2>Regulador de voltaje</h2>
+                <p>Mantiene estable el voltaje de alimentación.</p>
+                <a href="componentes/regulador.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="salida" data-name="pantalla lcd">
+                <div class="component-icon">LCD</div>
+                <span class="component-category">Salida</span>
+                <h2>Pantalla LCD</h2>
+                <p>Muestra información mediante caracteres o gráficos.</p>
+                <a href="componentes/lcd.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="salida" data-name="buzzer zumbador">
+                <div class="component-icon">♫</div>
+                <span class="component-category">Salida</span>
+                <h2>Buzzer</h2>
+                <p>Produce sonidos mediante una señal eléctrica.</p>
+                <a href="componentes/buzzer.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="salida" data-name="motor dc">
+                <div class="component-icon">M</div>
+                <span class="component-category">Salida</span>
+                <h2>Motor DC</h2>
+                <p>Convierte energía eléctrica en movimiento.</p>
+                <a href="componentes/motor-dc.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="salida" data-name="servomotor servo">
+                <div class="component-icon">↻</div>
+                <span class="component-category">Salida</span>
+                <h2>Servomotor</h2>
+                <p>Controla la posición angular de un eje.</p>
+                <a href="componentes/servomotor.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="herramientas" data-name="protoboard">
+                <div class="component-icon">▦</div>
+                <span class="component-category">Herramientas</span>
+                <h2>Protoboard</h2>
+                <p>Permite montar circuitos sin soldar.</p>
+                <a href="componentes/protoboard.html">Ver información</a>
+            </article>
+
+            <article class="component-card" data-category="herramientas" data-name="multimetro">
+                <div class="component-icon">⌁</div>
+                <span class="component-category">Herramientas</span>
+                <h2>Multímetro</h2>
+                <p>Mide voltaje, corriente, resistencia y continuidad.</p>
+                <a href="componentes/multimetro.html">Ver información</a>
+            </article>
+
+        </section>
+
+        <p id="noResults" class="no-results">No se encontraron componentes.</p>
+
+        <section class="creators-section">
+            <div class="section-title">
+                <div class="title-icon">👥</div>
+                <div>
+                    <h2>Creadores del proyecto</h2>
+                    <p>Equipo responsable del desarrollo de ElectroBot.</p>
+                </div>
+            </div>
+
+            <button id="editCreatorsButton" class="edit-button" type="button">
+                ✏️ Editar creadores
+            </button>
+
+            <div class="creators-grid">
+                <article class="creator-card">
+                    <div class="creator-avatar" id="avatar1">S</div>
+                    <h3 id="creatorName1">Sergio</h3>
+                    <p id="creatorRole1">Desarrollador</p>
+                </article>
+
+                <article class="creator-card">
+                    <div class="creator-avatar" id="avatar2">C</div>
+                    <h3 id="creatorName2">Fabricio Ccahuana</h3>
+                    <p id="creatorRole2">Diseñador del proyecto</p>
+                </article>
+
+                <article class="creator-card">
+                    <div class="creator-avatar" id="avatar3">C</div>
+                    <h3 id="creatorName3">Adriano Moran</h3>
+                    <p id="creatorRole3">Investigador de electrónica</p>
+                </article>
+
+                <article class="creator-card">
+                    <div class="creator-avatar" id="avatar2">C</div>
+                    <h3 id="creatorName2">Piero Meza</h3>
+                    <p id="creatorRole2">Desarrollador</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <div id="creatorModal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button id="closeModalButton" class="close-modal" type="button">✕</button>
+
+            <h2 id="modalTitle">Editar creadores</h2>
+            <p>Modifica los nombres y cargos del equipo.</p>
+
+            <div class="creator-edit-box">
+                <h3>👤 Creador 1</h3>
+                <label for="nameInput1">Nombre</label>
+                <input id="nameInput1" type="text">
+                <label for="roleInput1">Cargo</label>
+                <input id="roleInput1" type="text">
+            </div>
+
+            <div class="creator-edit-box">
+                <h3>👤 Creador 2</h3>
+                <label for="nameInput2">Nombre</label>
+                <input id="nameInput2" type="text">
+                <label for="roleInput2">Cargo</label>
+                <input id="roleInput2" type="text">
+            </div>
+
+            <div class="creator-edit-box">
+                <h3>👤 Creador 3</h3>
+                <label for="nameInput3">Nombre</label>
+                <input id="nameInput3" type="text">
+                <label for="roleInput3">Cargo</label>
+                <input id="roleInput3" type="text">
+            </div>
+
+            <div class="modal-actions">
+                <button id="saveCreatorsButton" class="save-button" type="button">
+                    Guardar cambios
+                </button>
+                <button id="cancelModalButton" class="cancel-button" type="button">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 ElectroBot. Proyecto educativo de electrónica.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

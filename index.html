@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ElectroBot | Aprende Electrónica</title>
+    
+    <link rel="icon" type="image/png" href="https://img.magnific.com/vector-gratis/gradiente-circulo-rayo_78370-5397.jpg?semt=ais_hybrid&w=740&q=80">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 6%;
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00a884;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00a884;
+        }
+
+        .theme-button {
+            border: none;
+            background: #eafaf5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 40px;
+            max-width: 1200px;
+            width: 90%;
+            margin: 60px auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #00a884;
+        }
+
+        .hero h1 span {
+            color: #0984e3;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .main-button {
+            display: inline-block;
+            padding: 14px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00b894, #0984e3);
+            color: white;
+            transition: 0.3s;
+        }
+
+        .main-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 184, 148, 0.25);
+        }
+
+        .secondary-button {
+            display: inline-block;
+            padding: 12px 25px;
+            border: 2px solid #00b894;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #00a884;
+            font-weight: bold;
+        }
+
+        .secondary-button:hover {
+            background: #00b894;
+            color: white;
+        }
+
+        .hero-illustration {
+            background: linear-gradient(135deg, #dffaf2, #e5f2ff);
+            border-radius: 30px;
+            min-height: 330px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 130px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 50px auto 25px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: #00a884;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        .categories {
+            max-width: 1100px;
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 18px;
+            border: 1px solid #e5e5e5;
+            transition: 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #00b894;
+        }
+
+        .category-card .icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .category-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            color: #777;
+            line-height: 1.5;
+        }
+
+        /* Chatbot */
+
+        .chat-section {
+            width: 90%;
+            max-width: 900px;
+            margin: 65px auto;
+        }
+
+        .chatbot {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, #00b894, #0984e3);
+            color: white;
+        }
+
+        .bot-avatar {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: white;
+            color: #00a884;
+            font-size: 27px;
+        }
+
+        .chat-header h2 {
+            margin: 0 0 5px;
+            font-size: 22px;
+        }
+
+        .chat-header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .chat-messages {
+            height: 360px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 78%;
+            padding: 13px 16px;
+            border-radius: 16px;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        .message.bot .message-bubble {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user .message-bubble {
+            background: #00b894;
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .chat-input {
+            flex: 1;
+            min-width: 0;
+            border: 1px solid #d1d5db;
+            border-radius: 25px;
+            padding: 13px 18px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: #00b894;
+        }
+
+        .send-button {
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            background: #00b894;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .send-button:hover {
+            background: #009f7f;
+        }
+
+        .quick-questions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 0 15px 15px;
+            background: white;
+        }
+
+        .quick-question {
+            border: 1px solid #00b894;
+            background: #eafaf5;
+            color: #008f70;
+            padding: 8px 13px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .quick-question:hover {
+            background: #00b894;
+            color: white;
+        }
+
+        .tools {
+            max-width: 1100px;
+            width: 90%;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+        }
+
+        .tool-card h3 {
+            color: #00a884;
+        }
+
+        .tool-card p {
+            color: #777;
+            line-height: 1.5;
+        }
+
+        .tool-card a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #0984e3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding: 25px;
+            text-align: center;
+            background: #102a43;
+            color: white;
+        }
+
+        /* Modo oscuro */
+
+        body.dark-mode {
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .navbar,
+        body.dark-mode .category-card,
+        body.dark-mode .tool-card,
+        body.dark-mode .chatbot,
+        body.dark-mode .chat-input-area,
+        body.dark-mode .quick-questions {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .hero p,
+        body.dark-mode .section-title p,
+        body.dark-mode .category-card p,
+        body.dark-mode .tool-card p {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .chat-messages {
+            background: #0f172a;
+        }
+
+        body.dark-mode .message.bot .message-bubble {
+            background: #263449;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .chat-input {
+            background: #263449;
+            color: white;
+            border-color: #475569;
+        }
+
+        body.dark-mode .quick-question {
+            background: #164e42;
+            color: #6ee7b7;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tools {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .hero-illustration {
+                min-height: 230px;
+                font-size: 90px;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-messages {
+                height: 320px;
+            }
+
+            .message-bubble {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navegación -->
+    <header class="navbar">
+        <div class="logo">
+            ⚡ ElectroBot
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="componentes.html">Componentes</a>
+            <a href="guia.html">Guía</a>
+            <a href="calculadoras.html">Calculadoras</a>
+            <a href="minijuegos.html">Minijuegos</a>
+        </nav>
+
+        <button
+            id="themeToggle"
+            class="theme-button"
+            type="button">
+            🌙
+        </button>
+    </header>
+
+
+    <!-- Presentación -->
+    <main>
+
+        <section class="hero">
+            <div>
+                <h1>
+                    Aprende electrónica con
+                    <span>ElectroBot</span>
+                </h1>
+
+                <p>
+                    Descubre cómo funcionan los componentes electrónicos,
+                    aprende a crear circuitos y resuelve tus dudas con
+                    nuestro chatbot educativo.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="componentes.html" class="main-button">
+                        Ver componentes
+                    </a>
+
+                    <a href="minijuegos.html" class="secondary-button">
+                        Jugar ahora
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-illustration">
+                🤖⚡
+            </div>
+        </section>
+
+
+        <!-- Categorías -->
+        <section>
+            <div class="section-title">
+                <h2>Explora la electrónica</h2>
+
+                <p>
+                    Aprende desde los conceptos básicos hasta los circuitos
+                    más interesantes.
+                </p>
+            </div>
+
+            <div class="categories">
+
+                <article class="category-card">
+                    <div class="icon">🔋</div>
+                    <h3>Fuentes de energía</h3>
+                    <p>
+                        Conoce baterías, pilas y fuentes de alimentación.
+                    </p>
+                </article>
+
+                <article class="category-card">
+                    <div class="icon">🔧</div>
+                    <h3>Componentes</h3>
+                    <p>
+                        Aprende sobre resistencias, capacitores, diodos y más.
+                    </p>
+                </article>
+
+                <article class="category-card">
+                    <div class="icon">🧠</div>
+                    <h3>Controladores</h3>
+                    <p>
+                        Descubre Arduino, ESP32, sensores y microcontroladores.
+                    </p>
+                </article>
+
+                <article class="category-card">
+                    <div class="icon">📐</div>
+                    <h3>Medición</h3>
+                    <p>
+                        Utiliza el multímetro y aprende a medir circuitos.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+
+        <!-- Chatbot -->
+        <section class="chat-section">
+
+            <div class="section-title">
+                <h2>🤖 Habla con ElectroBot</h2>
+
+                <p>
+                    Pregúntame sobre componentes, fórmulas o circuitos.
+                </p>
+            </div>
+
+            <div class="chatbot">
+
+                <div class="chat-header">
+                    <div class="bot-avatar">
+                        🤖
+                    </div>
+
+                    <div>
+                        <h2>ElectroBot</h2>
+                        <p>Asistente educativo de electrónica</p>
+                    </div>
+                </div>
+
+
+                <div
+                    id="chatMessages"
+                    class="chat-messages">
+
+                    <div class="message bot">
+                        <div class="message-bubble">
+                            ¡Hola! Soy ElectroBot 🤖⚡<br>
+                            Pregúntame sobre resistencias, capacitores,
+                            diodos, transistores, Arduino, Ley de Ohm
+                            y muchos temas más.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="quick-questions">
+                    <button
+                        class="quick-question"
+                        type="button"
+                        data-question="¿Qué es una resistencia?">
+                        ¿Qué es una resistencia?
+                    </button>
+
+                    <button
+                        class="quick-question"
+                        type="button"
+                        data-question="¿Qué es un capacitor?">
+                        ¿Qué es un capacitor?
+                    </button>
+
+                    <button
+                        class="quick-question"
+                        type="button"
+                        data-question="Explícame la Ley de Ohm">
+                        Ley de Ohm
+                    </button>
+
+                    <button
+                        class="quick-question"
+                        type="button"
+                        data-question="¿Qué es un LED?">
+                        ¿Qué es un LED?
+                    </button>
+                </div>
+
+
+                <form
+                    id="chatForm"
+                    class="chat-input-area">
+
+                    <input
+                        id="chatInput"
+                        class="chat-input"
+                        type="text"
+                        placeholder="Escribe tu pregunta..."
+                        autocomplete="off"
+                        required>
+
+                    <button
+                        class="send-button"
+                        type="submit">
+                        ➤
+                    </button>
+                </form>
+
+            </div>
+        </section>
+
+
+        <!-- Herramientas -->
+        <section>
+            <div class="section-title">
+                <h2>Herramientas educativas</h2>
+
+                <p>
+                    Practica y aprende con diferentes recursos.
+                </p>
+            </div>
+
+            <div class="tools">
+
+                <article class="tool-card">
+                    <div class="icon">🧩</div>
+                    <h3>Catálogo de componentes</h3>
+                    <p>
+                        Consulta información sobre componentes electrónicos.
+                    </p>
+                    <a href="componentes.html">
+                        Explorar catálogo →
+                    </a>
+                </article>
+
+                <article class="tool-card">
+                    <div class="icon">🧮</div>
+                    <h3>Calculadoras</h3>
+                    <p>
+                        Calcula voltaje, corriente, resistencia y potencia.
+                    </p>
+                    <a href="calculadoras.html">
+                        Abrir calculadoras →
+                    </a>
+                </article>
+
+                <article class="tool-card">
+                    <div class="icon">🎮</div>
+                    <h3>Minijuegos</h3>
+                    <p>
+                        Aprende electrónica resolviendo retos divertidos.
+                    </p>
+                    <a href="minijuegos.html">
+                        Ver minijuegos →
+                    </a>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <p>
+            © 2026 ElectroBot. Aprende electrónica de forma divertida.
+        </p>
+    </footer>
+
+
+    <script>
+        const chatForm = document.getElementById("chatForm");
+        const chatInput = document.getElementById("chatInput");
+        const chatMessages = document.getElementById("chatMessages");
+
+        const themeToggle = document.getElementById("themeToggle");
+
+        function addMessage(text, sender) {
+            const message = document.createElement("div");
+            message.className = "message " + sender;
+
+            const bubble = document.createElement("div");
+            bubble.className = "message-bubble";
+
+            bubble.innerHTML = text;
+
+            message.appendChild(bubble);
+            chatMessages.appendChild(message);
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getBotResponse(question) {
+            const text = question.toLowerCase();
+
+            if (
+                text.includes("resistencia") ||
+                text.includes("resistor")
+            ) {
+                return `
+                    Una <strong>resistencia</strong> es un componente
+                    que limita el paso de la corriente eléctrica.
+                    Su unidad de medida es el ohmio (Ω).
+                    <br><br>
+                    Se utiliza para proteger componentes como los LED.
+                `;
+            }
+
+            if (
+                text.includes("capacitor") ||
+                text.includes("condensador")
+            ) {
+                return `
+                    Un <strong>capacitor</strong> almacena energía
+                    temporalmente en forma de campo eléctrico.
+                    <br><br>
+                    Se mide en faradios y se utiliza para filtrar,
+                    estabilizar y almacenar energía.
+                `;
+            }
+
+            if (
+                text.includes("diodo") &&
+                !text.includes("led")
+            ) {
+                return `
+                    Un <strong>diodo</strong> permite que la corriente
+                    circule principalmente en una sola dirección.
+                    <br><br>
+                    Tiene dos terminales: ánodo y cátodo.
+                `;
+            }
+
+            if (
+                text.includes("led") ||
+                text.includes("luz")
+            ) {
+                return `
+                    Un <strong>LED</strong> es un diodo emisor de luz.
+                    Se enciende cuando la corriente pasa por él
+                    en la dirección correcta.
+                    <br><br>
+                    Normalmente necesita una resistencia para evitar
+                    que circule demasiada corriente.
+                `;
+            }
+
+            if (
+                text.includes("transistor") ||
+                text.includes("mosfet")
+            ) {
+                return `
+                    Un <strong>transistor</strong> es un componente
+                    semiconductor que puede funcionar como interruptor
+                    o amplificador.
+                    <br><br>
+                    Los MOSFET son transistores controlados por voltaje.
+                `;
+            }
+
+            if (
+                text.includes("arduino") ||
+                text.includes("microcontrolador")
+            ) {
+                return `
+                    <strong>Arduino</strong> es una plataforma basada
+                    en microcontroladores que permite controlar sensores,
+                    motores, luces y otros componentes.
+                    <br><br>
+                    Se programa normalmente usando el lenguaje C/C++.
+                `;
+            }
+
+            if (
+                text.includes("esp32")
+            ) {
+                return `
+                    El <strong>ESP32</strong> es un microcontrolador
+                    que incluye conexión Wi-Fi y Bluetooth.
+                    <br><br>
+                    Es muy utilizado en proyectos de Internet de las cosas.
+                `;
+            }
+
+            if (
+                text.includes("ohm") ||
+                text.includes("voltaje") ||
+                text.includes("corriente")
+            ) {
+                return `
+                    La <strong>Ley de Ohm</strong> relaciona voltaje,
+                    corriente y resistencia.
+                    <br><br>
+                    <strong>V = I × R</strong>
+                    <br>
+                    V = voltaje, I = corriente y R = resistencia.
+                `;
+            }
+
+            if (
+                text.includes("potencia")
+            ) {
+                return `
+                    La potencia eléctrica indica cuánta energía
+                    se consume o transforma por segundo.
+                    <br><br>
+                    Su fórmula principal es:
+                    <strong>P = V × I</strong>.
+                `;
+            }
+
+            if (
+                text.includes("multimetro") ||
+                text.includes("multímetro")
+            ) {
+                return `
+                    Un <strong>multímetro</strong> es un instrumento
+                    que permite medir voltaje, corriente, resistencia
+                    y continuidad.
+                    <br><br>
+                    Antes de medir, debes seleccionar correctamente
+                    la función y los terminales.
+                `;
+            }
+
+            if (
+                text.includes("hola") ||
+                text.includes("buenas") ||
+                text.includes("hey")
+            ) {
+                return `
+                    ¡Hola! 🤖⚡
+                    ¿Qué tema de electrónica quieres aprender hoy?
+                `;
+            }
+
+            if (
+                text.includes("gracias")
+            ) {
+                return `
+                    ¡De nada! 😄
+                    Estoy aquí para ayudarte a aprender electrónica.
+                `;
+            }
+
+            return `
+                Todavía estoy aprendiendo sobre ese tema 🤖.
+                <br><br>
+                Puedes preguntarme sobre:
+                <strong>resistencias, capacitores, diodos, LED,
+                transistores, Arduino, ESP32, Ley de Ohm,
+                potencia o multímetros</strong>.
+            `;
+        }
+
+        chatForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const question = chatInput.value.trim();
+
+            if (question === "") {
+                return;
+            }
+
+            addMessage(question, "user");
+
+            chatInput.value = "";
+
+            setTimeout(function() {
+                const response = getBotResponse(question);
+                addMessage(response, "bot");
+            }, 400);
+        });
+
+        document.querySelectorAll(".quick-question").forEach(button => {
+            button.addEventListener("click", function() {
+                const question = button.dataset.question;
+
+                chatInput.value = question;
+                chatForm.dispatchEvent(new Event("submit"));
+            });
+        });
+
+        const savedTheme = localStorage.getItem("electrobot-theme");
+
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+            themeToggle.textContent = "☀️";
+        }
+
+        themeToggle.addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+
+            const darkMode =
+                document.body.classList.contains("dark-mode");
+
+            localStorage.setItem(
+                "electrobot-theme",
+                darkMode ? "dark" : "light"
+            );
+
+            themeToggle.textContent = darkMode ? "☀️" : "🌙";
+        });
+    </script>
+
+</body>
+</html>

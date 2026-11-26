@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroBot - Código de Colores</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .color-container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #16a34a;
+        }
+
+        .resistor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 35px auto;
+        }
+
+        .wire {
+            width: 70px;
+            height: 8px;
+            background: #64748b;
+        }
+
+        .resistor-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 260px;
+            height: 90px;
+            background: #d6a96c;
+            border-radius: 45px;
+            overflow: hidden;
+        }
+
+        .band {
+            width: 28px;
+            height: 100%;
+        }
+
+        .brown {
+            background: #78350f;
+        }
+
+        .black {
+            background: #111827;
+        }
+
+        .red {
+            background: #dc2626;
+        }
+
+        .orange {
+            background: #f97316;
+        }
+
+        .yellow {
+            background: #eab308;
+        }
+
+        .green {
+            background: #16a34a;
+        }
+
+        .blue {
+            background: #2563eb;
+        }
+
+        .violet {
+            background: #7c3aed;
+        }
+
+        .gray {
+            background: #6b7280;
+        }
+
+        .white {
+            background: white;
+        }
+
+        .gold {
+            background: #d4af37;
+        }
+
+        .silver {
+            background: #cbd5e1;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .option {
+            padding: 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .option:hover {
+            border-color: #22c55e;
+            background: #f0fdf4;
+        }
+
+        .message {
+            min-height: 30px;
+            margin-top: 25px;
+            font-weight: bold;
+        }
+
+        .button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #16a34a;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @media (max-width: 550px) {
+            .resistor-body {
+                width: 190px;
+                height: 70px;
+            }
+
+            .wire {
+                width: 35px;
+            }
+
+            .band {
+                width: 20px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">⚡ ElectroBot</div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="minijuegos.html">Minijuegos</a>
+    </nav>
+</header>
+
+<main class="color-container">
+    <h1>🎨 Código de Colores</h1>
+
+    <p>
+        Observa las bandas de la resistencia y elige su valor.
+    </p>
+
+    <div class="resistor">
+        <div class="wire"></div>
+
+        <div class="resistor-body">
+            <div class="band brown"></div>
+            <div class="band black"></div>
+            <div class="band red"></div>
+            <div class="band gold"></div>
+        </div>
+
+        <div class="wire"></div>
+    </div>
+
+    <div class="options">
+        <button class="option" onclick="checkAnswer('100 Ω')">
+            100 Ω
+        </button>
+
+        <button class="option" onclick="checkAnswer('1 kΩ')">
+            1 kΩ
+        </button>
+
+        <button class="option" onclick="checkAnswer('10 kΩ')">
+            10 kΩ
+        </button>
+
+        <button class="option" onclick="checkAnswer('100 kΩ')">
+            100 kΩ
+        </button>
+    </div>
+
+    <p id="message" class="message"></p>
+
+    <button class="button" onclick="location.reload()">
+        Nueva resistencia
+    </button>
+</main>
+
+<script>
+    function checkAnswer(answer) {
+        const message = document.getElementById("message");
+
+        if (answer === "1 kΩ") {
+            message.textContent =
+                "✅ ¡Correcto! Marrón = 1, negro = 0 y rojo = ×100.";
+            message.style.color = "#15803d";
+        } else {
+            message.textContent =
+                "❌ Incorrecto. El valor correcto es 1 kΩ.";
+            message.style.color = "#dc2626";
+        }
+    }
+</script>
+
+</body>
+</html>
